@@ -1,5 +1,5 @@
 module Clibpcap [system] {
   header "/usr/local/Cellar/libpcap/1.9.1/include/pcap.h"
-  link "libpcap"
+  link "/usr/local/Cellar/libpcap/1.9.1/lib/libpcap.dylib"
   export *
 }
