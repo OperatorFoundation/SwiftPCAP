@@ -1,4 +1,4 @@
-import CPcap
+import Clibpcap
 
 ///
 /// Struct defines the SwiftPCAP Module
@@ -30,7 +30,7 @@ public struct SwiftPCAP {
       // initialize memory for the pcap_pkthdr struct
       let ptr = UnsafeMutablePointer<pcap_pkthdr>.allocate(capacity: MemoryLayout<pcap_pkthdr>.size)
       currentHeader = ptr.pointee
-      ptr.deinitialize()
+      ptr.deinitialize(count: 1)
     }
     
     ///

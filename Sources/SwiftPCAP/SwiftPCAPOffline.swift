@@ -1,4 +1,4 @@
-import CPcap
+import Clibpcap
 import Foundation
 
 extension SwiftPCAP {
