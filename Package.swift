@@ -9,11 +9,18 @@ let package = Package(
     products: [
         .library(name: "SwiftPCAP", targets: ["SwiftPCAP"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/OperatorFoundation/SwiftHexTools", from: "1.1.3")
+    ],
     targets: [
         .target(
             name: "SwiftPCAP",
             dependencies: ["Clibpcap"]
         ),
-        .systemLibrary(name: "Clibpcap", pkgConfig: "libpcap")
+	.testTarget(
+	    name: "SwiftPCAPTests",
+	    dependencies: ["SwiftPCAP", "SwiftHexTools"]
+	),
+        .systemLibrary(name: "Clibpcap", pkgConfig: "libpcap", providers: [.brew(["libpcap"])])
     ]
 )
