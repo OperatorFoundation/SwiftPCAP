@@ -23,7 +23,7 @@ public struct SwiftPCAP {
     var pd: OpaquePointer? = nil
 
     /// packet header
-    var currentHeader: pcap_pkthdr
+    public var currentHeader: pcap_pkthdr
 
     /// base class initializer
     init() {
