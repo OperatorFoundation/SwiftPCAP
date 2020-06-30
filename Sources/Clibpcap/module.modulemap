@@ -1,5 +1,7 @@
-module Clibpcap [system] {
-  header "/usr/local/opt/libpcap/include/pcap.h"
-  link "/usr/local/opt/libpcap/lib/libpcap.dylib"
-  export *
+module Clibpcap [system]
+{
+    requires macos
+    header "/usr/local/opt/libpcap/include/pcap.h"
+    link "/usr/local/opt/libpcap/lib/libpcap.dylib"
+    export *
 }
