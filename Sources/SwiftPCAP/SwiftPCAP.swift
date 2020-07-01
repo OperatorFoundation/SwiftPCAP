@@ -1,4 +1,11 @@
-import Clibpcap
+
+
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+    import ClibpcapMacOS
+#elseif os(Linux)
+    import ClibpcapLinux
+#endif
+
 
 ///
 /// Struct defines the SwiftPCAP Module

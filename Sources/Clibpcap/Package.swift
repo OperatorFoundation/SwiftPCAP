@@ -5,5 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "Clibpcap",
-    pkgConfig: "libpcap"
+    pkgConfig: "libpcap",
+    providers: [
+    .brew("libpcap"),
+    .apt("libpcap-dev")
+    ]
 )

@@ -1,7 +1,13 @@
-module Clibpcap [system]
+module ClibpcapMacOS [system]
 {
-    requires macos
     header "/usr/local/opt/libpcap/include/pcap.h"
     link "/usr/local/opt/libpcap/lib/libpcap.dylib"
+    export *
+}
+
+module ClibpcapLinux [system]
+{
+    header "/usr/include/pcap.h"
+    link "/usr/lib/x86_64-linux-gnu/libpcap.so"
     export *
 }
