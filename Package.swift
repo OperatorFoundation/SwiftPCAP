@@ -21,6 +21,6 @@ let package = Package(
 	    name: "SwiftPCAPTests",
 	    dependencies: ["SwiftPCAP", "SwiftHexTools"]
 	),
-    .systemLibrary(name: "Clibpcap", pkgConfig: "libpcap", providers: [.brew(["libpcap"]), .apt(["libpcap-dev"])])
+    .systemLibrary(name: "Clibpcap", providers: [.brew(["libpcap"]), .apt(["libpcap-dev"])])
     ]
 )
