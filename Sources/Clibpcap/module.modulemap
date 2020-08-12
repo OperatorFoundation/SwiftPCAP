@@ -1,5 +1,6 @@
 module ClibpcapMacOS [system]
 {
+    //path to libpcap as installed by homebrew. Don't forget to export the path, example: echo 'export PATH="/usr/local/opt/libpcap/bin:$PATH"' >> ~/.zshrc
     header "/usr/local/opt/libpcap/include/pcap.h"
     link "/usr/local/opt/libpcap/lib/libpcap.dylib"
     export *
