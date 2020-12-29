@@ -26,9 +26,9 @@ extension SwiftPCAP {
       let errbuf = UnsafeMutablePointer<Int8>.allocate(capacity: Int(PCAP_ERRBUF_SIZE))
       
       // create the pcap_t handle
-      pd = pcap_open_offline(path, errbuf)
+      pcapDevice = pcap_open_offline(path, errbuf)
       
-      if (pd == nil) {
+      if (pcapDevice == nil) {
         throw Errors.errorMessage(msg: String(cString: errbuf))
       }
     }

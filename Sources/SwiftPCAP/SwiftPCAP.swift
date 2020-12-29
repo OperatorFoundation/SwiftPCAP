@@ -27,7 +27,7 @@ public struct SwiftPCAP {
   public class Base {
 
     /// the libpcap pcap_t handle
-    var pd: OpaquePointer? = nil
+    var pcapDevice: OpaquePointer? = nil
 
     /// packet header
     public var currentHeader: pcap_pkthdr
@@ -45,7 +45,7 @@ public struct SwiftPCAP {
     ///
     public func nextPacketUnsafe() -> UnsafeBufferPointer<u_char> {
       // get the next packet, should not block
-      let pkt = pcap_next(pd, &currentHeader)
+      let pkt = pcap_next(pcapDevice, &currentHeader)
       if (pkt != nil) {
         return UnsafeBufferPointer(start: pkt, count: Int(currentHeader.len))
       }

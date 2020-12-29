@@ -37,9 +37,9 @@ extension SwiftPCAP {
       let errbuf = UnsafeMutablePointer<Int8>.allocate(capacity: Int(PCAP_ERRBUF_SIZE))
       
       // create the pcap_t handle for live capture
-      pd = pcap_create(interface, errbuf)
+      pcapDevice = pcap_create(interface, errbuf)
 
-      if (pd == nil) {
+      if (pcapDevice == nil) {
         throw Errors.errorMessage(msg: String(cString: errbuf))
       }
 
@@ -47,7 +47,7 @@ extension SwiftPCAP {
       try setOptions()
       
       // activate the live capture handle
-      pcap_activate(pd);
+      pcap_activate(pcapDevice);
     }
 
     ///
@@ -58,11 +58,21 @@ extension SwiftPCAP {
     private func setOptions() throws {
       // libpcap options
       // currently no error handling, may want to add that
-      try handleReturnCode(pcap_set_buffer_size(pd, self.bufferSize))
-      try handleReturnCode(pcap_set_snaplen(pd, self.snaplen))
-      try handleReturnCode(pcap_set_promisc(pd, 1))
-      try handleReturnCode(pcap_set_timeout(pd, 1))
-      try handleReturnCode(pcap_setnonblock(pd, 1, nil))
+        print("Calling...")
+        print("pcap_set_buffer_size \(bufferSize)")
+      try handleReturnCode(pcap_set_buffer_size(pcapDevice, bufferSize))
+        
+        print("pcap_set_snaplen \(snaplen)")
+      try handleReturnCode(pcap_set_snaplen(pcapDevice, snaplen))
+        
+        print("pcap_set_promisc 1")
+      try handleReturnCode(pcap_set_promisc(pcapDevice, 1))
+        
+        print("pcap_set_timeout 1")
+      try handleReturnCode(pcap_set_timeout(pcapDevice, 1))
+        
+        print("pcap_setnonblock 1")
+      try handleReturnCode(pcap_setnonblock(pcapDevice, 1, nil))
     }
   }
 
