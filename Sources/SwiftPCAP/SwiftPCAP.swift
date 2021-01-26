@@ -52,12 +52,17 @@ public struct SwiftPCAP {
       
       return UnsafeBufferPointer<u_char>(start: nil, count: 0)
     }
-    
+
     ///
     /// Safe version of nextPacket copies packet into a Swift [UInt8]
     ///
     public func nextPacket() -> [UInt8] {
       return Array(nextPacketUnsafe())
+    }
+
+    public func close()
+    {
+      pcap_close(pcapDevice)
     }
 
     ///
