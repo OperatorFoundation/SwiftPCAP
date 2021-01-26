@@ -1,4 +1,5 @@
 
+import Foundation
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
     import ClibpcapMacOS
@@ -39,25 +40,22 @@ public struct SwiftPCAP {
       currentHeader = ptr.pointee
       ptr.deinitialize(count: 1)
     }
-    
+
     ///
     /// Get the next packet, if available. This function should not block.
     ///
-    public func nextPacketUnsafe() -> UnsafeBufferPointer<u_char> {
-      // get the next packet, should not block
-      let pkt = pcap_next(pcapDevice, &currentHeader)
-      if (pkt != nil) {
-        return UnsafeBufferPointer(start: pkt, count: Int(currentHeader.len))
-      }
-      
-      return UnsafeBufferPointer<u_char>(start: nil, count: 0)
-    }
-
-    ///
-    /// Safe version of nextPacket copies packet into a Swift [UInt8]
-    ///
-    public func nextPacket() -> [UInt8] {
-      return Array(nextPacketUnsafe())
+    public func nextPacket() -> Data?
+    {
+        // get the next packet, should not block
+        
+        guard let pkt = pcap_next(pcapDevice, &currentHeader)
+        else
+        {
+          return nil
+        }
+        
+        let unsafePacket = UnsafeBufferPointer(start: pkt, count: Int(currentHeader.len))
+        return Data(unsafePacket)
     }
 
     public func close()
