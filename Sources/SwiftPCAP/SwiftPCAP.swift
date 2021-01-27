@@ -51,6 +51,16 @@ public struct SwiftPCAP {
         guard let pkt = pcap_next(pcapDevice, &currentHeader)
         else
         {
+          if let error = pcap_geterr(pcapDevice)
+          {
+              print(error)
+              if let pointer = UnsafePointer<CChar>(error)
+              {
+                  let errorString = String(cString: UnsafePointer<CChar>(error)!)
+                  print("Bad pcap_next \(errorString)")
+              }
+          }
+
           return nil
         }
         
