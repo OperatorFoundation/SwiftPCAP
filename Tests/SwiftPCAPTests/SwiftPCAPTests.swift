@@ -102,7 +102,6 @@ class SwiftPCAPTests: XCTestCase {
     
   }
 
-
     func testMultipleCaptures()
     {
         for _ in 0..<2
@@ -123,6 +122,7 @@ class SwiftPCAPTests: XCTestCase {
       ("testFirstPacket", testFirstPacket),
       ("testSecondPacket", testSecondPacket),
       ("testEOF", testEOF),
+      ("testMultipleCaptures", testMultipleCaptures)
     ]
   }
 }
