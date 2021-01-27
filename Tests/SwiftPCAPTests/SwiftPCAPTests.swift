@@ -106,7 +106,7 @@ class SwiftPCAPTests: XCTestCase {
     {
         for iteration in 0..<2
         {
-            guard let pcap = try? SwiftPCAP.Live(interface: "lo") else
+            guard let pcap = try? SwiftPCAP.Live(interface: "eth0") else
             {
               print("Bad init \(iteration)")
               XCTFail()
