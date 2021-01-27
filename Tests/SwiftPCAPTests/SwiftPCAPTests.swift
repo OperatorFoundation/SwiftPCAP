@@ -106,20 +106,22 @@ class SwiftPCAPTests: XCTestCase {
     {
         for _ in 0..<2
         {
-            let pcap = try? SwiftPCAP.Live(interface: "enp0s5")
-            XCTAssertNotNil(pcap)
-
-          for _ in 0..<1000000000000 {
-            let packet = pcap!.nextPacket()
-            if packet != nil
+            guard let pcap = try? SwiftPCAP.Live(interface: "eth0") else
             {
-              print(packet)
+                XCTFail()
+                return
             }
-            //print(".", terminator: "")
-          }
-            //XCTAssertNotNil(packet)
 
-            pcap!.close()
+            for _ in 0..<100
+            {
+                guard let packet = pcap.nextPacket() else
+                {
+                    XCTFail()
+                    return
+                }
+            }
+
+            pcap.close()
         }
     }
   
