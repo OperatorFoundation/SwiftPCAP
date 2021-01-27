@@ -104,10 +104,11 @@ class SwiftPCAPTests: XCTestCase {
 
     func testMultipleCaptures()
     {
-        for _ in 0..<2
+        for iteration in 0..<2
         {
             guard let pcap = try? SwiftPCAP.Live(interface: "eth0") else
             {
+<<<<<<< HEAD
                 XCTFail()
                 return
             }
@@ -119,6 +120,23 @@ class SwiftPCAPTests: XCTestCase {
                     XCTFail()
                     return
                 }
+=======
+              print("Bad init \(iteration)")
+              XCTFail()
+              return
+            }
+
+            for packetTry in 0..<4
+            {
+              if let packet = pcap.nextPacket()
+              {
+                print("Packet \(packet)")
+              }
+              else
+              {
+                print("Bad packet \(iteration) \(packetTry)")
+              }
+>>>>>>> 89120f7c765bb7716c6fb7bf707a65f3a710a5eb
             }
 
             pcap.close()
