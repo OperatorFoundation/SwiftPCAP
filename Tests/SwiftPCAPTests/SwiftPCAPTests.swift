@@ -74,7 +74,6 @@ class SwiftPCAPTests: XCTestCase {
 //    }
   }
 
-
   func testSecondPacket() {
 //    writeTestPCAP()
 //    do {
@@ -102,6 +101,21 @@ class SwiftPCAPTests: XCTestCase {
   func testEOF() {
     
   }
+
+
+    func testMultipleCaptures()
+    {
+        for _ in 0..<2
+        {
+            let pcap = try? SwiftPCAP.Live(interface: "en0")
+            XCTAssertNotNil(pcap)
+
+            let packet = pcap!.nextPacket()
+            XCTAssertNotNil(packet)
+
+            pcap!.close()
+        }
+    }
   
   static var allTests : [(String, (SwiftPCAPTests) -> () throws -> Void)] {
     return [
